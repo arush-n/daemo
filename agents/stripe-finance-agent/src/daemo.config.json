@@ -1,0 +1,15 @@
+{
+    "execution_mode": "atomic",
+    "tools": {
+        "get_financial_metrics": {
+            "policy": "read_only"
+        },
+        "investigate_payment_failure": {
+            "policy": "read_only"
+        },
+        "execute_secure_refund": {
+            "policy": "human_approval",
+            "confirmation_message": "Use this tool ONLY to refund a charge after explicit user request."
+        }
+    }
+}
