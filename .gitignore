@@ -27,3 +27,4 @@ coverage/
 coverage-final.json
 .idea/
 *.local
+*.auth_token

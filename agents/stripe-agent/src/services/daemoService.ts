@@ -44,7 +44,7 @@ export function initializeDaemoService(): SessionData {
     console.log("[Daemo] Initializing Daemo service...");
 
     const builder = new DaemoBuilder()
-        .withServiceName("stripe-finance-agent")
+        .withServiceName("StripeFinanceAgent")
         .withSystemPrompt(systemPrompt);
 
     const stripeFunctions = new StripeFunctions();
@@ -57,7 +57,7 @@ export function initializeDaemoService(): SessionData {
 }
 
 export async function startHostedConnection(sessionData: SessionData): Promise<void> {
-    const agentApiKey = process.env.DAEMO_AGENT_API_KEY;
+    const agentApiKey = process.env.DAEMO_SECRET_KEY;
     // Note: Gateway URL handling can be added here if needed, defaulting to standard behavior
 
     if (!agentApiKey) {
@@ -68,8 +68,22 @@ export async function startHostedConnection(sessionData: SessionData): Promise<v
     // Handle 'mock_key' for testing environments
     const effectiveKey = agentApiKey || 'mock_key';
 
+    // Sanitize Gateway URL (Ensure it has https for SSL, but SDK handles parsing)
+    console.log(`[Daemo] RAW DAEMO_GATEWAY_URL: "${process.env.DAEMO_GATEWAY_URL}"`);
+    let gatewayUrl = process.env.DAEMO_GATEWAY_URL || "https://engine.daemo.ai:50052";
+
+    // Ensure it starts with https:// if it doesn't (assuming secure by default for daemo.ai)
+    if (!gatewayUrl.startsWith("http")) {
+        gatewayUrl = `https://${gatewayUrl}`;
+    }
+
+    console.log(`[Daemo] Using Gateway URL: ${gatewayUrl}`);
+
     hostedConnection = new DaemoHostedConnection(
-        { agentApiKey: effectiveKey },
+        {
+            agentApiKey: effectiveKey,
+            daemoGatewayUrl: gatewayUrl
+        },
         sessionData
     );
 

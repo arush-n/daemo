@@ -14,5 +14,9 @@
     "src/**/*",
     "verification/**/*",
     "scripts/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
   ]
 }

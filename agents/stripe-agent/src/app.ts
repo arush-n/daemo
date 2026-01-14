@@ -1,14 +1,15 @@
 import express from 'express';
-import bodyParser from 'body-parser';
 import { AgentController } from './controllers/agentController';
 
 const app = express();
 
-// Middleware
-app.use(bodyParser.json());
+// Middleware - Express 5 has built-in body parsing
+app.use(express.json());
 
 // Routes
-app.post('/agent/query', AgentController.handleQuery);
+// Route per documentation
+console.log('[App] Registering route: POST /agent/query-stream');
+app.post('/agent/query-stream', AgentController.handleQuery);
 
 // Health Check
 app.get('/health', (req, res) => {

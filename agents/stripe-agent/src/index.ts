@@ -1,13 +1,21 @@
 import 'reflect-metadata';
 import * as dotenv from 'dotenv';
+dotenv.config();
+
 import app from './app';
 import { initializeDaemoService, startHostedConnection } from './services/daemoService';
 
-dotenv.config();
-
 const PORT = process.env.PORT || 5000;
 
+// DEBUG: Test route removed
+
 async function main() {
+    console.log("DEBUG: Starting main function...");
+    console.log("DEBUG: Environment check - PORT:", process.env.PORT);
+    console.log("DEBUG: Environment check - DAEMO_SECRET_KEY:", process.env.DAEMO_SECRET_KEY ? "Set" : "Not Set");
+    console.log("DEBUG: Environment check - DAEMO_AGENT_URL:", process.env.DAEMO_AGENT_URL);
+    console.log("DEBUG: Environment check - DAEMO_GATEWAY_URL:", process.env.DAEMO_GATEWAY_URL);
+
     console.log("Starting Stripe Finance Agent (Daemo Edition)...");
 
     try {
@@ -21,6 +29,7 @@ async function main() {
         const serverPromise = new Promise<void>((resolve) => {
             app.listen(PORT, () => {
                 console.log(`🚀 HTTP Server running on http://localhost:${PORT}`);
+                console.log("DEBUG: Server is ready to handle requests.");
                 resolve();
             });
         });

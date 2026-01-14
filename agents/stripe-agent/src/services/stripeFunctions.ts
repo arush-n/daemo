@@ -7,10 +7,10 @@ export class StripeFunctions {
 
     @DaemoFunction({
         description: "Calculate total revenue volume and transaction count between two inclusive dates. Use this to explain revenue trends.",
-        tags: ["Payments", "Revenue", "Refunds", "SaaS"],
+        tags: ["revenue", "finance", "payments"],
         category: "Finance",
-        inputSchema: Schemas.FinancialMetricsInputSchema,
-        outputSchema: Schemas.FinancialMetricsOutputSchema
+        inputSchema: Schemas.FinancialMetricsInputSchema as any,
+        outputSchema: Schemas.FinancialMetricsOutputSchema as any
     })
     public async getFinancialMetrics(input: { start_date: string, end_date: string }) {
         console.log(`[StripeFunctions] getFinancialMetrics: ${input.start_date} to ${input.end_date}`);
@@ -64,8 +64,8 @@ export class StripeFunctions {
         description: "Search for failed payments by customer email to assist with support inquiries. Returns details of recent failures.",
         tags: ["support", "investigation", "failures"],
         category: "Support",
-        inputSchema: Schemas.PaymentFailureInputSchema,
-        outputSchema: Schemas.PaymentFailureOutputSchema
+        inputSchema: Schemas.PaymentFailureInputSchema as any,
+        outputSchema: Schemas.PaymentFailureOutputSchema as any
     })
     public async investigatePaymentFailure(input: { customer_email: string }) {
         console.log(`[StripeFunctions] investigatePaymentFailure: ${input.customer_email}`);
@@ -113,8 +113,8 @@ export class StripeFunctions {
         description: "Issue a full refund to a customer for a specific charge. REQUIRES HUMAN CONFIRMATION.",
         tags: ["refunds", "transactions", "sensitive"],
         category: "Finance",
-        inputSchema: Schemas.SecureRefundInputSchema,
-        outputSchema: Schemas.SecureRefundOutputSchema
+        inputSchema: Schemas.SecureRefundInputSchema as any,
+        outputSchema: Schemas.SecureRefundOutputSchema as any
     })
     public async executeSecureRefund(input: { charge_id: string, reason: Stripe.RefundCreateParams.Reason }) {
         console.log(`[StripeFunctions] executeSecureRefund: ${input.charge_id} (${input.reason})`);
