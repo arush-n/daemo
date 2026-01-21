@@ -11,6 +11,20 @@ A production-grade AI Financial Assistant built with the **Daemo Engine**. This 
     *   **Daemo Hosted**: Connects securely to the Daemo Dashboard.
     *   **REST API**: Exposes a local `/agent/query` endpoint for custom integrations.
 
+## 📸 Demo
+
+### 1. Revenue Intelligence
+The agent can calculate complex financial metrics over any date range.
+
+![Revenue Intelligence Demo](assets/query_playground_demo.png)
+*The Agent successfully calculating total revenue, fees, and net profit for January 2026, handling natural language date queries.*
+
+### 2. Support & Refunds
+The agent can investigate customer history to find failed payments and verify refunds.
+
+![Refund Investigation Demo](assets/refund_investigation_demo.png)
+*The Agent finding a specific refund (ID: `ch_3Sp...`) for a customer and confirming no other recent failures exist.*
+
 ## 🛠️ Architecture
 
 *   **Runtime**: Node.js & TypeScript
